@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Data Scaling Laws in Imitation Learning for Robotic Manipulation">
+  <meta name="keywords" content="Data Scaling Laws, Imitation Learning, Robotic Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Data Scaling Laws in Imitation Learning for Robotic Manipulation
+  </title>
+
+  <!-- Thumbnail for social media sharing -->
+  <meta property="og:image" content="media/images/thu_logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="media/images/thu_logo.png" type="image/jpeg">
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="stylesheet" href="./static/source_serif_4.css">
+  <link rel="stylesheet" href="./static/source_sans_3.css">  
+  <link rel="stylesheet" href="./static/academicons.min.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/fontawesome.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/brands.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/light.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</head>
+<!-- <body onload="updateInTheWild();updateBimanual();"> -->
+
+<section class="hero">
+  <div class="hero-body" style="padding-top: 1.5%;">
+    <div class="container is-fullhd">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <img src="media/images/title-1.jpg" alt="ReKep" style="display: block; margin: 0 auto; width: 90%">
+          <img src="media/images/title-2.jpg" alt="ReKep" style="display: block; margin: 0 auto; width: 70%">
+          <br>
+          <!-- <h1 class="title is-1 publication-title" style="color:#775295;">in Imitation Learning for Robotic Manipulation</h1> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a target="_blank" href="https://fanqi-lin.github.io/">Fanqi Lin</a><sup>1,2,3*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://yingdong-hu.github.io/">Yingdong Hu</a><sup>1,2,3*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://spyzss.github.io/reven.github.io/">Pingyue Sheng</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://alvinwen428.github.io/">Chuan Wen</a><sup>1,2,3</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=FiP-TVUAAAAJ">Jiacheng You</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://yang-gao.weebly.com/">Yang Gao</a><sup>1,2,3</sup>
+            </span>
+          </div>
+          <div class="is-size-5 affiliation">
+            <sup>1</sup>Tsinghua University,
+            <sup>2</sup>Shanghai Qi Zhi Institute,
+            <sup>3</sup>Shanghai Artificial Intelligence Laboratory
+          </div>
+          <br>
+          <div class="affiliation-note">
+            <sup>*</sup> indicates equal contributions
+          </div>
+          <div class="button-container">
+            <a href="./paper.pdf" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="fa-light fa-file"></i>&emsp14;PDF</a>
+            <a href="https://arxiv.org/abs/2410.18647" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="ai ai-arxiv"></i>&emsp14;arXiv</a>
+            <!-- <a href="https://youtu.be/2S8YhBdLdww" target="_blank" class="button"><i class="fa-light fa-film"></i>&emsp14;Video</a> -->
+            <!-- <a href="https://x.com/wenlong_huang/status/1829135436717142319" target="_blank" class="button"><i class="fa-brands fa-x-twitter"></i>&emsp14;tl;dr</a> -->
+            <a href="https://github.com/Fanqi-Lin/Data-Scaling-Laws" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="fa-light fa-code"></i>&emsp14;Code</a>
+            <a href="https://huggingface.co/datasets/Fanqi-Lin/Processed-Task-Dataset" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="fa-light fa-folder"></i>&emsp14;Data</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-widescreen">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered  is-centered">
+          <video id="teaser" autoplay muted loop controls height="100%" width="100%">
+            <source src="media/videos/teaser_nomask.mp4"
+                    type="video/mp4">
+          </video>
+          </br>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+        We show that with proper data scaling, a single-task policy can generalize well to <strong>any new environment</strong> and 
+        <strong>any new object</strong> within the same category. Remarkably, the robot can even be deployed zero-shot in a hot pot restaurant 🍲!
+        </h2>
+      </div>
+    </div>
+  </div>
+
+<br>
+<div class="container is-max-widescreen">
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3" style="margin-bottom: 0.5em; color:#6510ad">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+        Data scaling has revolutionized fields like natural language processing and computer vision, 
+        providing models with remarkable generalization capabilities. In this paper, we investigate whether similar data scaling laws exist in robotics, 
+        particularly in robotic manipulation, and whether appropriate data scaling can yield single-task robot policies that can be deployed zero-shot for any object within the same category in any environment.
+        To this end, we conduct a comprehensive empirical study on data scaling in imitation learning. By collecting data across numerous environments and objects, 
+        we study how a policy's generalization performance changes with the number of training environments, objects, and demonstrations. 
+        Throughout our research, we collect over 40,000 demonstrations and execute more than 15,000 real-world robot rollouts under a rigorous evaluation protocol. 
+        Our findings reveal several intriguing results: the generalization performance of the policy follows a roughly <b>power-law</b> relationship with the number of environments and objects. 
+        The <b>diversity</b> of environments and objects is far more important than the absolute number of demonstrations; once the number of demonstrations per environment 
+        or object reaches a certain threshold, additional demonstrations have minimal effect. Based on these insights, we propose an efficient data collection strategy. 
+        With four data collectors working for one afternoon, we collect sufficient data to enable the policies for two tasks to achieve approximately 90% success rates in novel environments with unseen objects.
+      </p>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#6510ad">Power-Law Data Scaling Laws</h2>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">The policy's generalization ability to new objects, new environments, or 
+    both scales approximately as a <strong>power law</strong> with the number of training objects, training environments, or 
+    training environment-object pairs, respectively. This is
+    evidenced by the correlation coefficient r in the video below.</b>
+  </p>
+  <!-- <img src="media/figures/method.jpg" class="method-image" /> -->
+  <div class="columns is-vcentered  is-centered">
+    <video id="teaser" autoplay muted loop  height="90%" width="90%">
+      <source src="media/videos/curve.mp4"
+              type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#6510ad">Evaluation Videos</h2>
+  <p class="content" style="text-align: left">
+    Building upon power-law data scaling laws, we propose an efficient data collection strategy. By 
+    collecting data from numerous environments (e.g., 32 environments), each featuring a unique manipulation 
+    object and 50 demonstrations, we can train a policy that 
+    generalizes effectively—achieving a 90% success rate—to any new environment and object. Below, we 
+    present sample rollouts from <strong>8 unseen testing environments</strong> investigated in the paper.
+  </p>
+
+  <div class="container block is-centered">
+    <div class="columns is-centered">
+      <div class="column is-2" style="width: 22%;">
+          <div class="select" style="display: block;">
+              <select id="env-selection" style="width: 100%;" onchange="SelectTestVideo()">
+                  <option value="env_1">Env 1 (Iron Cabinet)</option>
+                  <option value="env_2">Env 2 (Wooden Podium)</option>
+                  <option value="env_3">Env 3 (Black Workbench)</option>
+                  <option value="env_4">Env 4 (Two Chairs)</option>
+                  <option value="env_5">Env 5 (Cart)</option>
+                  <option value="env_6">Env 6 (Workstaion)</option>
+                  <option value="env_7">Env 7 (Meeting Room 1)</option>
+                  <option value="env_8">Env 8 (Meeting Room 2)</option>
+              </select>
+          </div>
+      </div>
+      <div class="column is-2" style="width: 20%;">
+          <div class="select" style="display: block;">
+              <select id="task-selection" style="width: 100%;" onchange="SelectTestVideo()">
+                <option value="pour_water">Pour Water</option>
+                <option value="pick_place_mouse">Mouse Arrangement</option>
+                <option value="fold_towel">Fold Towels</option>
+                <option value="unplug">Unplug Charge</option>
+              </select>
+          </div>
+      </div>
+      <div class="column is-2" style="width: 17%;">
+          <div class="select" style="display: block;"  onchange="SelectTestVideo()">
+              <select id="object-selection" style="width: 100%;">
+                <option value="1">Unseen Object 1</option>
+                <option value="2">Unseen Object 2</option>
+              </select>
+          </div>
+      </div>
+      <div class="column is-2">
+        <button class="button is-info is-outlined" id="shuffle-video" style="width: 100%; color: #6510ad; border-color: #6510ad;">
+            <span class="icon">
+                <ion-icon name="shuffle-outline" role="img" class="md hydrated"></ion-icon>
+            </span>
+            <span>Shuffle</span>
+        </button>
+    </div>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column has-text-centered">
+      <p style="text-align:center;">
+        <video id="test-video" width="80%" height="100%" controls autoplay loop muted>
+          <source src="media/videos/test-wild-videos/env_1/pour_water/1.mp4" type="video/mp4">
+        </video>
+      </p>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<section class="section" style="padding: 0;">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+      <div class="container has-text-centered">
+        <h2 class="title is-3" style="margin-bottom: 0.5em; color:#6510ad">More In-The-Wild Environments</h2>
+        <p class="content" style="margin-bottom: 1.5em; text-align: left;">
+          We deployed the robot in various in-the-wild environments—including hot pot restaurants 🍲, cafés ☕, elevators 🛗, fountains ⛲, 
+          and other locations where data had not been previously collected. We found that the policy generalized surprisingly well!
+        </p>
+      </div>
+
+      <!-- <p class="content has-text-centered">
+        <span style="letter-spacing: 0.07em;">V<span style="font-variant: small-caps; font-size: 1.2em;">i</span>L<span style="font-variant: small-caps; font-size: 1.2em;">a</span></span> effectively utilizes visual feedback in an intuitive and natural way, enabling robust closed-loop planning in dynamic environments.
+      </p> -->
+
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/1.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/2.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/3.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/4.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/6.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/5.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/7.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist2"
+            controls
+            muted
+            autoplay
+            loop controlsList="nodownload"
+            width="99%">
+            <source src="media/videos/wild-autonomous-skills/8.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+  </div>
+</section>
+
+<br>
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="color:#6510ad;">Hardware Setup</h2>
+  <img src="media/images/hardware-setups.jpg" class="method-image" />
+</div>
+
+<br>
+<br>
+<br>
+<h2 class="title is-3 is-centered has-text-centered" style="color:#6510ad;">Acknowledgments</h2>
+<p>
+  The robot hardware is partially supported by Tsinghua ISR Lab. We would like to express our gratitude to Cheng Chi and Chuer Pan for their invaluable advice on UMI. We are also thankful to Linkai Wang for his assistance in setting up the movable platform. Additionally, we appreciate the thoughtful discussions and feedback provided by Tong Zhang, Ruiqian Nai, Geng Chen, Weijun Dong, Shengjie Wang, and Renhao Wang.
+</p>
+
+<br>
+<br>
+<h2 class="title is-3 is-centered has-text-centered" style="color:#6510ad;">BibTeX</h2>
+<p class="bibtex">
+  @misc{lin2024datascalinglawsimitation, <br>
+  &nbsp;&nbsp;title = {Data Scaling Laws in Imitation Learning for Robotic Manipulation}, <br>
+  &nbsp;&nbsp;author = {Fanqi Lin and Yingdong Hu and Pingyue Sheng and Chuan Wen and Jiacheng You and Yang Gao}, <br>
+  &nbsp;&nbsp;archivePrefix = {arXiv}, <br>
+  &nbsp;&nbsp;eprint = {2410.18647}, <br>
+  &nbsp;&nbsp;primaryClass = {cs.RO}, <br>
+  &nbsp;&nbsp;url = {https://arxiv.org/abs/2410.18647}, <br>
+  &nbsp;&nbsp;year = {2024} <br>
+  }
+</p>
+
+</section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://nerfies.github.io">Nerfies</a>
+            and <a href="https://rekep-robot.github.io/">ReKep</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('shuffle-video').addEventListener('click', function() {
+    var envSelect = document.getElementById('env-selection');
+    var taskSelect = document.getElementById('task-selection');
+    var objectSelect = document.getElementById('object-selection');
+    randomizeSelect(envSelect);
+    randomizeSelect(taskSelect);
+    randomizeSelect(objectSelect);
+    console.log("Shuffle", envSelect.value, taskSelect.value, objectSelect.value)
+    SelectTestVideo();
+  });
+
+  function randomizeSelect(selectElement) {
+    var options = selectElement.options;
+    random_move = Math.random();
+    var randomIndex = Math.floor(Math.random() * options.length);
+    selectElement.selectedIndex = randomIndex;
+  }
+
+  function SelectTestVideo() {
+    var env_id = document.getElementById("env-selection").value;
+    var task_name = document.getElementById("task-selection").value;
+    var object_id = document.getElementById("object-selection").value;
+
+    console.log("SelectTestVideo", env_id, task_name, object_id)
+    var video = document.getElementById("test-video");
+    video.src = "media/videos/test-wild-videos/" + env_id + "/" + 
+                task_name + "/" + object_id + ".mp4";
+    video.play();
+  }
+</script>
+
+<style>
+  .button.is-info.is-outlined:focus,
+  .button.is-info.is-outlined:active {
+    background-color: transparent;
+    border-color: #6510ad;
+    color: #6510ad;
+    box-shadow: none;
+  }
+
+  .button.is-info.is-outlined:hover {
+    background-color: #6510ad;
+    color: #fff;
+  }
+
+  .button.is-info.is-outlined:hover .icon ion-icon,
+  .button.is-info.is-outlined:hover span {
+    color: #fff;
+  }
+</style>
+
+</body>
+</html>
